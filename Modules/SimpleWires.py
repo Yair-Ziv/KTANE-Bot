@@ -8,7 +8,7 @@ def defuse(last_digit):
     split into 3 sub-functions that solve depending
     on the number of wires in the module.
     """
-    wires = raw_input('Enter the wire sequence:\n').split(', ')
+    wires = raw_input('Enter the wire sequence:\n').replace(' ', '').split(',')
     if(len(wires) == 3):
         case_3(wires)
         return
@@ -16,7 +16,7 @@ def defuse(last_digit):
         case_4(wires, last_digit)
         return
     elif(len(wires) == 5):
-        case_5(wires)
+        case_5(wires, last_digit)
         return
     else:
         case_6(wires)
@@ -33,7 +33,7 @@ def case_3(wires):
     
     #If there are no red wires, cut the second wire
     if red_count == 0:
-        print 'Cut the 2nd wire'
+        print 'Cut the second wire'
         return
     
     #Otherwise, if the last wire is white, cut the last wire
@@ -43,10 +43,10 @@ def case_3(wires):
 
     if blue_count > 1:
         if wires[2] == 'blue':
-            print 'Cut the 3rd wire'
+            print 'Cut the third wire'
             return
         else:
-            print 'Cut the 2nd wire'
+            print 'Cut the second wire'
             return
     
     print 'Cut the last wire'
@@ -94,9 +94,36 @@ def case_4(wires, last_digit):
     print 'Cut the second wire'
     return
 
+def case_5(wires, last_digit):
+    """
+    Solve for 5 wires case
+    """
+    red_count = 0
+    yellow_count = 0
+    black_count = 0
+    #Counting the number of appearances of each wire color.
+    for wire in wires:
+        if wire == 'red':
+            red_count += 1
+        elif wire == 'yellow':
+            yellow_count += 1
+        elif wire == 'black':
+            black_count += 1
 
-def case_5(wires):
-    pass
+    if wires[-1] == 'black' and last_digit % 2 == 1:
+        print 'Cut the fourth wire'
+        return
+
+    if red_count == 1 and yellow_count > 1:
+        print 'Cut the first wire'
+        return
+    
+    if black_count == 0:
+        print 'Cut the second wire'
+        return
+
+    print 'Cut the first wire'
+    return
 
 def case_6(wires):
     pass
