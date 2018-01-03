@@ -6,6 +6,7 @@ position_list = []
 label_list = []
 
 def defuse():
+    global round_num
     if round_num == 1:
         round_one()
     if round_num == 2:
@@ -16,39 +17,62 @@ def defuse():
         round_four()
     if round_num == 5:
         round_five()
+    
+    round_num += 1
 
 def round_one():
     """
     Solve for round one
     """
-    sequence = raw_input('Enter the current sequence: ')
+    sequence = raw_input('Enter the current sequence:\n')
     indicator = int(sequence[0])
     if indicator == 1:
-        print 'Press the button in the second position'
+        print 'Press the button in position 2'
         position_list.append(2)
         label_list.append(sequence[2])
         return
 
     if indicator == 2:
-        print 'Press the button in the second position'
+        print 'Press the button in position 2'
         position_list.append(2)
         label_list.append(sequence[2])
         return
 
     if indicator == 3:
-        print 'Press the button in the third position'
+        print 'Press the button in position 3'
         position_list.append(3)
         label_list.append(sequence[3])
         return
 
     if indicator == 4:
-        print 'Press the button in the fourth position'
+        print 'Press the button in position 4'
         position_list.append(4)
         label_list.append(sequence[4])
         return
 
 def round_two():
-    pass
+    sequence = raw_input('Enter the current sequence\n')
+    indicator = int(sequence[0])
+
+    if indicator == 1:
+        for index, value in enumerate(sequence):
+            if value == '4':
+                print 'Press the button in position {}'.format(index)
+                return
+
+    if indicator == 2:
+        print 'Press the button in position {}'.format(position_list[0])
+        return
+
+    if indicator == 3:
+        print 'Press the button in position 1'
+        return
+
+    if indicator == 4:
+        print 'Press the button in position {}'.format(position_list[0])
+        position_list.append(4)
+        label_list.append(sequence[4])
+        return
 
 def round_three():
     pass
