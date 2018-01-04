@@ -153,4 +153,38 @@ def round_four():
         return
 
 def round_five():
-    pass
+    """
+    Round 5 of the memory module
+    """
+    sequence = raw_input('Enter the current sequence:\n')
+    indicator = int(sequence[0])
+
+    if indicator == 1:
+        for index, value in enumerate(sequence[1:]):
+            if value == label_list[0]:
+                print 'Press the button in position {}'.format(index + 1)
+
+    if indicator == 2:
+        for index, value in enumerate(sequence[1:]):
+            if value == label_list[1]:
+                print 'Press the button in position {}'.format(index + 1)
+
+    if indicator == 3:
+        for index, value in enumerate(sequence[1:]):
+            if value == label_list[3]:
+                print 'Press the button in position {}'.format(index + 1)
+
+    if indicator == 4:
+        for index, value in enumerate(sequence[1:]):
+            if value == label_list[2]:
+                print 'Press the button in position {}'.format(index + 1)
+
+    reset_module()
+
+def reset_module():
+    global position_list
+    global label_list
+    global round_num
+    position_list = []
+    label_list = []
+    round = 0
