@@ -19,7 +19,7 @@ def defuse(last_digit):
         case_5(wires, last_digit)
         return
     else:
-        case_6(wires)
+        case_6(wires, last_digit)
         return
 
 def case_3(wires):
@@ -30,12 +30,12 @@ def case_3(wires):
             red_count += 1
         elif wire == 'blue':
             blue_count += 1
-    
+
     #If there are no red wires, cut the second wire
     if red_count == 0:
         print 'Cut the second wire'
         return
-    
+
     #Otherwise, if the last wire is white, cut the last wire
     if wires[-1] == 'white':
         print 'Cut the last wire'
@@ -48,7 +48,7 @@ def case_3(wires):
         else:
             print 'Cut the second wire'
             return
-    
+
     print 'Cut the last wire'
     return
 
@@ -67,7 +67,7 @@ def case_4(wires, last_digit):
             blue_count += 1
         elif wire == 'yellow':
             yellow_count += 1
-    
+
     #If there is more than one red wire and the last digit
     #of the serial number is odd, but the last red wire
     if red_count > 1 and last_digit % 2 == 1:
@@ -75,7 +75,7 @@ def case_4(wires, last_digit):
             if wires[i] == 'red':
                 print 'Cut the wire in position {}'.format(i  + 1)
                 return
-    
+
     #Otherwise, if the last wire is yellow and there are no red wires
     #Cut the first wire
     if wires[-1] == 'yellow' and red_count == 0:
@@ -117,7 +117,7 @@ def case_5(wires, last_digit):
     if red_count == 1 and yellow_count > 1:
         print 'Cut the first wire'
         return
-    
+
     if black_count == 0:
         print 'Cut the second wire'
         return
@@ -125,5 +125,32 @@ def case_5(wires, last_digit):
     print 'Cut the first wire'
     return
 
-def case_6(wires):
-    pass
+def case_6(wires, last_digit):
+    """
+    Solve for 6 wire case
+    """
+    yellow_count = 0
+    white_count = 0
+    red_count = 0
+    for wire in wires:
+        if wire == 'yellow':
+            yellow_count += 1
+        elif wire == 'white':
+            white_count += 1
+        elif wire == 'red':
+            red_count += 1
+
+    if yellow_count == 0 and last_digit % 2 == 1:
+        print 'Cut the third wire'
+        return
+
+    if yellow_count == 1 and white_count > 1:
+        print 'Cut the fourth wire'
+        return
+
+    if red_count == 0:
+        print 'Cut the last wire'
+        return
+
+    print 'Cut the fourth wire'
+    return
