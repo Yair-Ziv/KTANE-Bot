@@ -1,9 +1,6 @@
 """
 Complicated Wires solver
 Requires: Last digit of the serial, has a parallel port, battert count
-TODO Find text model that fits
-TODO Enhance the program by converting the values (red, blue, light, star)
-to binary values, then calculate to decimal and check by sum
 """
 
 CUT_MESSAGE = 'cut'
@@ -23,7 +20,7 @@ def defuse(last_digit, has_parallel, battery_count):
     for wire in wire_sequence:
         output_sequence += _defuse_wire(wire, last_digit % 2 == 0, has_parallel, battery_count)
         output_sequence += ', '
-    
+
     print output_sequence
 
 
@@ -35,6 +32,7 @@ def _defuse_wire(wire, last_digit_even, has_parallel, battery_count):
     is_blue = False
     is_star = False
     is_light = False
+    is_battery_count = battery_count >= 2
 
     #If there is nothing on the wire.
     if len(wire) == 0:
@@ -50,6 +48,32 @@ def _defuse_wire(wire, last_digit_even, has_parallel, battery_count):
         elif identifier == 'light' or identifier == 'led':
             is_light = True
 
+    binary_representation = ''
+    binary_representation += '1' if is_red else '0'
+    binary_representation += '1' if is_blue else '0'
+    binary_representation += '1' if is_light else '0'
+    binary_representation += '1' if is_star else '0'
+
+    decimal_value = int(binary_representation, 2)
+    return {
+        0:CUT_MESSAGE,
+        1:CUT_MESSAGE,
+        2:NOT_CUT_MESSAGE,
+        3:CUT_MESSAGE if is_battery_count else NOT_CUT_MESSAGE,
+        4:CUT_MESSAGE if last_digit_even else NOT_CUT_MESSAGE,
+        5:NOT_CUT_MESSAGE,
+        6:CUT_MESSAGE if has_parallel else NOT_CUT_MESSAGE,
+        7:CUT_MESSAGE if has_parallel else NOT_CUT_MESSAGE,
+        8:CUT_MESSAGE if last_digit_even else NOT_CUT_MESSAGE,
+        9:CUT_MESSAGE,
+        10:CUT_MESSAGE if is_battery_count else NOT_CUT_MESSAGE,
+        11:CUT_MESSAGE if is_battery_count else NOT_CUT_MESSAGE,
+        12:CUT_MESSAGE if last_digit_even else NOT_CUT_MESSAGE,
+        13:CUT_MESSAGE if has_parallel else NOT_CUT_MESSAGE,
+        14:CUT_MESSAGE if last_digit_even else NOT_CUT_MESSAGE,
+        15:NOT_CUT_MESSAGE
+    }[decimal_value]
+    """
     if is_red and is_blue and is_star and is_light:
         return NOT_CUT_MESSAGE
 
@@ -96,3 +120,4 @@ def _defuse_wire(wire, last_digit_even, has_parallel, battery_count):
         return CUT_MESSAGE if last_digit_even else NOT_CUT_MESSAGE
 
     return CUT_MESSAGE
+    """
