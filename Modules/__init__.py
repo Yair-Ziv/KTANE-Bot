@@ -6,3 +6,4 @@ import Modules.SimpleWires
 import Modules.SimonSays
 import Modules.Memory
 import Modules.ComplicatedWires
+import Modules.WireSequence
