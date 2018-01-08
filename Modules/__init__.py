@@ -7,3 +7,4 @@ import Modules.SimonSays
 import Modules.Memory
 import Modules.ComplicatedWires
 import Modules.WireSequence
+import Modules.Knobs
