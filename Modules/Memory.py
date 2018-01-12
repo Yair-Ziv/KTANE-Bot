@@ -17,7 +17,7 @@ def defuse():
         round_four()
     if round_num == 5:
         round_five()
-    
+
     round_num += 1
 
 def round_one():

@@ -16,7 +16,8 @@ def defuse(batteries, car_indicator, freak_indicator):
     elif color == 'red' and text == 'hold':
         print 'press and release immediately'
         return
-
+    
+    print 'Press and hold'
     strip_indicator = raw_input('What is the color of the strip indicator?\n')
     if strip_indicator == 'blue':
         print 'Release when timer has a 4'

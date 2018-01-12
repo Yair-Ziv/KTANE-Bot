@@ -8,3 +8,4 @@ import Modules.Memory
 import Modules.ComplicatedWires
 import Modules.WireSequence
 import Modules.Knobs
+import Modules.Keypads
